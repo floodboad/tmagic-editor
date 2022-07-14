@@ -21,7 +21,6 @@ import { EventEmitter } from 'events';
 import StageCore from './StageCore';
 import type { Runtime, RuntimeWindow, StageRenderConfig } from './types';
 import { getHost, isSameDomain } from './util';
-import Vue3Runtime from './Vue3Runtime';
 
 export default class StageRender extends EventEmitter {
   /** 组件的js、css执行的环境，直接渲染为当前window，iframe渲染则为iframe.contentWindow */
@@ -59,7 +58,6 @@ export default class StageRender extends EventEmitter {
   public getMagicApi = () => ({
     onPageElUpdate: (el: HTMLElement) => this.emit('page-el-update', el),
     onRuntimeReady: (runtime: Runtime) => {
-      console.log('============> get magicApi : ', runtime);
       this.runtime = runtime;
       // @ts-ignore
       globalThis.runtime = runtime;
@@ -88,27 +86,14 @@ export default class StageRender extends EventEmitter {
     }
   }
 
-  // public getRuntime = (): Promise<Runtime> => {
-  //   if (this.runtime) return Promise.resolve(this.runtime);
-  //   return new Promise((resolve) => {
-  //     const listener = (runtime: Runtime) => {
-  //       this.off('runtime-ready', listener);
-  //       resolve(runtime);
-  //     };
-  //     this.on('runtime-ready', listener);
-  //   });
-  // };
-
   public getRuntime = (): Promise<Runtime> => {
-    console.log('=====>get runtime', this.runtime);
     if (this.runtime) return Promise.resolve(this.runtime);
     return new Promise((resolve) => {
-      // const listener = (runtime: Runtime) => {
-      const r = new Vue3Runtime();
-      // this.off('runtime-ready', r);
-      resolve(r);
-      // };
-      // this.on('runtime-ready', listener);
+      const listener = (runtime: Runtime) => {
+        this.off('runtime-ready', listener);
+        resolve(runtime);
+      };
+      this.on('runtime-ready', listener);
     });
   };
 

@@ -58,6 +58,7 @@ export default defineConfig({
       output: {
         entryFileNames: 'assets/[name].js',
       },
+      // external: /D:\/projects\/idea\/RichSpreadsheet.*/,
     },
   },
 });

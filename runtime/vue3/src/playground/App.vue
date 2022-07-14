@@ -11,7 +11,7 @@ import Core from '@tmagic/core';
 import { Id, MApp, MNode } from '@tmagic/schema';
 import { Magic, RemoveData, UpdateData } from '@tmagic/stage';
 import { getNodePath } from '@tmagic/utils';
-import { initSheet } from "../modules/elsheet/index";
+import { initSheet, handlerAdd } from "../modules/elsheet/index";
 
 declare global {
   interface Window {
@@ -148,13 +148,14 @@ export default defineComponent({
 
         add({ config }: UpdateData) {
           console.log('add config', config);
-          if (!root.value) throw new Error('error');
-          if (!selectedId.value) throw new Error('error');
-          const path = getNodePath(selectedId.value, [root.value]);
-          const node = path.pop();
-          const parent = node?.items ? node : path.pop();
-          if (!parent) throw new Error('未找到父节点');
-          parent.items?.push(config);
+          handlerAdd( config );
+          // if (!root.value) throw new Error('error');
+          // if (!selectedId.value) throw new Error('error');
+          // const path = getNodePath(selectedId.value, [root.value]);
+          // const node = path.pop();
+          // const parent = node?.items ? node : path.pop();
+          // if (!parent) throw new Error('未找到父节点');
+          // parent.items?.push(config);
         },
 
         update({ config }: UpdateData) {

@@ -21,6 +21,8 @@ import {
   showCellNoteById,
   getRowIdByRowIndex,
   getColumnByColIndex,
+  // deepClone,
+  // reFreshCellByCoord
 } from "@buff2017/rich-spreadsheet";
 import { cols, rows } from "./data.js";
 import cellRenderers from "./cellRenderers/index";
@@ -28,6 +30,8 @@ import cellEditors from "./cellEditors";
 import cellTransformer from "./cellTransfomer";
 import ColumnTitleRenderers from "./columnTitleRenderers";
 import GsClipboardHandler from "./GSClipboard/handler/index";
+import {UpdateData} from "@tmagic/stage";
+import {MNode} from "@tmagic/schema";
 // import { deepClone } from "@buff2017/rich-spreadsheet/controllers/hooks/helper";
 // import {getScreenshot1, renderCell, reFreshCellByCoord } from "@buff2017/rich-spreadsheet/global/api.js"
 
@@ -383,4 +387,9 @@ RichSpread.$on("message", (args) => {
 
 export const initSheet = () => {
   create();
+}
+
+export const handlerAdd = ( config : MNode) => {
+  console.log("=============> sheet add compoment", config);
+  // reFreshCellByCoord(9,1);
 }

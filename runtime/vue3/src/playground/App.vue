@@ -5,12 +5,13 @@
 
 <script lang="ts">
 import { computed, defineComponent, nextTick, onMounted, provide, reactive, ref, watch } from 'vue';
-import { RichSpread } from '@buff2017/rich-spreadsheet';
+// import { RichSpread } from '@buff2017/rich-spreadsheet';
 
 import Core from '@tmagic/core';
 import { Id, MApp, MNode } from '@tmagic/schema';
 import { Magic, RemoveData, UpdateData } from '@tmagic/stage';
 import { getNodePath } from '@tmagic/utils';
+import { initSheet } from "../modules/elsheet/index";
 
 declare global {
   interface Window {
@@ -44,6 +45,77 @@ export default defineComponent({
     // const richsheet = new RichSpread();
 
     onMounted(() => {
+      initSheet();
+
+      // RichSpread.create({
+      //   container: 'luckysheet',
+      //   lang: 'zh',
+      //   forceCalculation: false,
+      //   fontList: [],
+      //   columnHeaderHeight: 30,
+      //   defaultColWidth: 120, //  col 宽度
+      //   defaultRowHeight: 30, //  cell 高度
+      //   rowHeaderWidth: 40, //  左侧序号宽度
+      //   showtoolbar: false,
+      //   showinfobar: false,
+      //   showsheetbar: false,
+      //   showstatisticBar: false,
+      //   data: [
+      //     {
+      //       name: 'Cell',
+      //       index: '0',
+      //       zoomRatio: 1,
+      //       order: '0',
+      //       column: [],
+      //       row: 12,
+      //       celldata: [
+      //         {
+      //           r: 0,
+      //           c: 0,
+      //           v: {
+      //             customKey: { a: 1 },
+      //             bg: null,
+      //             bl: 0,
+      //             it: 0,
+      //             ff: 0,
+      //             fs: 11,
+      //             fc: 'rgb(51, 51, 51)',
+      //             ht: 1,
+      //             vt: 1,
+      //             v: 1,
+      //             ct: { fa: 'General', t: 'n' },
+      //             m: '1',
+      //           },
+      //         },
+      //       ],
+      //       frozen: {
+      //         type: 'cancel',
+      //         // type: "rangeColumn",
+      //         // range: {
+      //         //   row_focus: 0,
+      //         //   column_focus: 2,
+      //         // },
+      //       },
+      //       config: {
+      //         columnlen: {
+      //           2: 540,
+      //         },
+      //         columnsGroup: [
+      //           // {
+      //           //   start: 1,
+      //           //   end: 4,
+      //           //   hide: false,
+      //           // },
+      //           // {
+      //           //   start: 8,
+      //           //   end: 12,
+      //           //   hide: true,
+      //           // },
+      //         ],
+      //       },
+      //     },
+      //   ],
+      // });
       window.magic?.onRuntimeReady({
         getApp() {
           return app;
@@ -107,75 +179,6 @@ export default defineComponent({
           const index = parent.items?.findIndex((child: MNode) => child.id === node.id);
           parent.items.splice(index, 1);
         },
-      });
-      RichSpread.create({
-        container: 'luckysheet',
-        lang: 'zh',
-        forceCalculation: false,
-        fontList: [],
-        columnHeaderHeight: 30,
-        defaultColWidth: 120, //  col 宽度
-        defaultRowHeight: 30, //  cell 高度
-        rowHeaderWidth: 40, //  左侧序号宽度
-        showtoolbar: false,
-        showinfobar: false,
-        showsheetbar: false,
-        showstatisticBar: false,
-        data: [
-          {
-            name: 'Cell',
-            index: '0',
-            zoomRatio: 1,
-            order: '0',
-            column: [],
-            row: 12,
-            celldata: [
-              {
-                r: 0,
-                c: 0,
-                v: {
-                  customKey: { a: 1 },
-                  bg: null,
-                  bl: 0,
-                  it: 0,
-                  ff: 0,
-                  fs: 11,
-                  fc: 'rgb(51, 51, 51)',
-                  ht: 1,
-                  vt: 1,
-                  v: 1,
-                  ct: { fa: 'General', t: 'n' },
-                  m: '1',
-                },
-              },
-            ],
-            frozen: {
-              type: 'cancel',
-              // type: "rangeColumn",
-              // range: {
-              //   row_focus: 0,
-              //   column_focus: 2,
-              // },
-            },
-            config: {
-              columnlen: {
-                2: 540,
-              },
-              columnsGroup: [
-                // {
-                //   start: 1,
-                //   end: 4,
-                //   hide: false,
-                // },
-                // {
-                //   start: 8,
-                //   end: 12,
-                //   hide: true,
-                // },
-              ],
-            },
-          },
-        ],
       });
     });
 

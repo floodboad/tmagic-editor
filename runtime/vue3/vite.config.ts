@@ -20,13 +20,14 @@ import path from 'path';
 
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
+// import vueJsx from '@vitejs/plugin-vue-jsx';
 // @ts-ignore
 import externalGlobals from 'rollup-plugin-external-globals';
 
 export default defineConfig({
   base: '/tmagic-editor/playground/runtime/vue3',
-  plugins: [vue(), vueJsx(), externalGlobals({ vue: 'Vue' }, { exclude: ['page.html', 'playground.html'] })],
+  // plugins: [vue(), vueJsx(), externalGlobals({ vue: 'Vue' }, { exclude: ['page.html', 'playground.html'] })],
+  plugins: [vue(),  externalGlobals({ vue: 'Vue' }, { exclude: ['page.html', 'playground.html'] })],
 
   resolve: {
     alias: [

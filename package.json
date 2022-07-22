@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@7.1.9",
   "scripts": {
-    "bootstrap": "pnpm i && pnpm prepare && cd runtime/vue2 && npm i",
+    "bootstrap": "pnpm i  && cd runtime/vue3 && npm i",
     "clean:top": "rimraf */**/dist */dist coverage dwt*",
     "clean:modules": "rimraf node_modules **/node_modules **/**/node_modules",
     "clean:all": "pnpm clean:top && pnpm clean:modules",
@@ -24,7 +24,6 @@
     "reinstall": "pnpm clean:all && pnpm bootstrap",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
-    "prepare": "husky install",
     "commit": "git-cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "release": "node scripts/release.js"
@@ -45,8 +44,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.0",
-    "@commitlint/cli": "^16.2.3",
-    "@commitlint/config-conventional": "^16.2.1",
     "@types/jquery": "^3.5.14",
     "@types/node": "^15.12.4",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
@@ -64,7 +61,6 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-vue": "^7.11.1",
     "execa": "^4.0.2",
-    "husky": "^7.0.0",
     "jsdom": "^19.0.0",
     "lint-staged": "^11.0.1",
     "minimist": "^1.2.6",

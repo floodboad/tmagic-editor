@@ -199,6 +199,7 @@ export default defineComponent({
       },
 
       dragoverHandler(e: DragEvent) {
+        console.log("--------->drag over start-----------");
         e.preventDefault();
         if (e.dataTransfer) {
           e.dataTransfer.dropEffect = 'move';
@@ -206,7 +207,9 @@ export default defineComponent({
       },
 
       async dropHandler(e: DragEvent) {
+        console.log("--------->drag start1-----------");
         e.preventDefault();
+        console.log("--------->drag start1-----------");
         if (e.dataTransfer && page.value && stageContainer.value && stage) {
           // eslint-disable-next-line no-eval
           const config = eval(`(${e.dataTransfer.getData('data')})`);

@@ -22,7 +22,7 @@ import {
   getRowIdByRowIndex,
   getColumnByColIndex,
   // deepClone,
-  // reFreshCellByCoord
+  reFreshCellByCoord
 } from "@buff2017/rich-spreadsheet";
 import { cols, rows } from "./data.js";
 import cellRenderers from "./cellRenderers/index";
@@ -139,17 +139,17 @@ function create() {
           {
             name: "复制当前行",
             action() {
-              // const lastStartRow =
-              //   params.selection[params.selection.length - 1].row[1];
-              //
-              // let newArr = [];
-              // params.rows.map((row, index) => {
-              //   const newItem = deepClone(row);
-              //   newItem.id = Math.ceil(Math.random() * 9999);
-              //   newArr.push(newItem);
-              // });
-              //
-              // insertRowBottomOrColumnRightCellSync("row", lastStartRow, newArr);
+              const lastStartRow =
+                params.selection[params.selection.length - 1].row[1];
+
+              let newArr = [];
+              params.rows.map((row, index) => {
+                const newItem = deepClone(row);
+                newItem.id = Math.ceil(Math.random() * 9999);
+                newArr.push(newItem);
+              });
+
+              insertRowBottomOrColumnRightCellSync("row", lastStartRow, newArr);
             },
           },
           {
@@ -262,6 +262,12 @@ function create() {
     showinfobar: false,
     showsheetbar: false,
     showstatisticBar: false,
+    hook: {
+      cellDragStop: function (cell, postion, sheetFile, ctx, event) {
+        console.info("--------------> cell dragstop starting :");
+        console.info("--------------> cell dragstop:",cell, postion, sheetFile, ctx, event);
+      }
+    },
     data: [
       {
         name: "Cell",
@@ -391,5 +397,6 @@ export const initSheet = () => {
 
 export const handlerAdd = ( config : MNode) => {
   console.log("=============> sheet add compoment", config);
-  // reFreshCellByCoord(9,1);
+  // RichSpread.reFreshCellByCoord(9,1);
+  reFreshCellByCoord(9,1);
 }

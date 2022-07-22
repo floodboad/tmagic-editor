@@ -39,7 +39,8 @@ export enum GuidesType {
 /** css z-index */
 export enum ZIndex {
   /** 蒙层，用于监听用户操作，需要置于顶层 */
-  MASK = '99999',
+  // MASK = '99999',
+  MASK = '-99',
   /** 选中的节点 */
   SELECTED_EL = '666',
   GHOST_EL = '700',

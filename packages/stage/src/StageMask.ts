@@ -57,6 +57,7 @@ const createWrapper = (): HTMLDivElement => {
       width: 100%;
       overflow: hidden;
       z-index: ${ZIndex.MASK};
+    pointer-events: none;
     `,
   });
 

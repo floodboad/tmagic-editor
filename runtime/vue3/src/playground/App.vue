@@ -1,6 +1,6 @@
 <template>
   <!--  <magic-ui-page v-if="pageConfig" :config="pageConfig"></magic-ui-page>-->
-  <div id="luckysheet"></div>
+  <div id="luckysheet" ></div>
 </template>
 
 <script lang="ts">
@@ -214,4 +214,14 @@ body,
 .action-area {
   background-color: rgba(51, 153, 255, 0.5) !important;
 }
+
+#luckysheet {
+  position: absolute;
+  /*left: 240px;*/
+  /*top: 144px;*/
+  /*width: calc(100vw - 240px);*/
+  /*height: calc(100vh - 144px);*/
+  pointer-events: auto;
+}
+
 </style>
